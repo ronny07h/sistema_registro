@@ -1,0 +1,12 @@
+Negocio\PersonaServicio.class
+Model\Producto.class
+Negocio\ProductoService.class
+Datos\PersonaDAO.class
+Datos\ProductoDAO.class
+Datos\ConexionDB.class
+Util\JpaUtil.class
+Vista\FormularioFactura.class
+Model\Factura.class
+Model\Persona.class
+Vista\FormularioFactura$1.class
+Model\DatalleFactura.class
