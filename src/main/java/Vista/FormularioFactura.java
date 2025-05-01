@@ -584,9 +584,20 @@ public class FormularioFactura extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_BuscarProductoActionPerformed
 
     private void btn_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarActionPerformed
-        if (validarFormularioDetalle()) {
+   if (validarFormularioDetalle()) {
             int cantidad = Integer.parseInt(txt_Cantidad.getText().trim());
+            
+           
             if (cantidad > 0) {
+                for(DetalleFactura d: detallesFactura){
+                    if(d.getProducto().getCodigo().equals(productoEncontrado.getCodigo())){
+                    d.setCantidad(d.getCantidad()+cantidad);
+                    actualizarTablaDetalles();
+                    limpiarCamposProducto();
+                     return;
+                    } 
+                }
+                
                 DetalleFactura detalle = new DetalleFactura();
                 detalle.setProducto(productoEncontrado);
                 detalle.setCantidad(cantidad);
