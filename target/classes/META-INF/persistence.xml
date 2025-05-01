@@ -4,6 +4,8 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>Modelos.Persona</class>
     <class>Modelos.Producto</class>
+    <class>Model.DetalleFactura</class>
+    <class>Model.Factura</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemar?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>

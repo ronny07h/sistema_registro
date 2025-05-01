@@ -1,11 +1,13 @@
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\com\mycompany\sistemareguistro\SistemaReguistro.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\ConexionDB.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\FacturaDAO.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\PersonaDAO.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\ProductoDAO.java
-C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\DatalleFactura.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\DetalleFactura.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Factura.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Persona.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Producto.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\FacturaServicio.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\PersonaServicio.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\ProductoService.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Util\JpaUtil.java

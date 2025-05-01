@@ -14,33 +14,41 @@ import java.util.List;
 @Entity
 @Table(name = "factura")
 public class Factura {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "idpersona")
     private Persona persona;
-
+    
+    
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
-    private List<DatalleFactura> detalle;
-
-    public Factura() {
+    private List<DetalleFactura> detalles;
+    
+    
+    public Factura (){
+        
     }
-
-    public Factura(Persona persona, List<DatalleFactura> detalle) {
-
+    
+    public Factura (Persona persona, List<DetalleFactura> detalles){
         this.persona = persona;
-        this.detalle = detalle;
+        this.detalles = detalles;
+        
+        for(DetalleFactura d: detalles){
+            d.setFactura(this);
+        }
     }
-
-    public Factura(int id, Persona persona, List<DatalleFactura> detalle) {
+    
+    
+    public Factura (int id, Persona persona, List<DetalleFactura> detalles){
         this.id = id;
         this.persona = persona;
-        this.detalle = detalle;
+        this.detalles = detalles;
     }
 
+    
     public int getId() {
         return id;
     }
@@ -57,17 +65,18 @@ public class Factura {
         this.persona = persona;
     }
 
-    public List<DatalleFactura> getDetalle() {
-        return detalle;
+    public List<DetalleFactura> getDetalles() {
+        return detalles;
     }
 
-    public void setDetalle(List<DatalleFactura> detalle) {
-        this.detalle = detalle;
+    public void setDetalles(List<DetalleFactura> detalles) {
+        this.detalles = detalles;
     }
 
     @Override
     public String toString() {
-        return "Factura{" + "id=" + id + ", persona=" + persona + ", detalle=" + detalle + '}';
+        return "Factura{" + "id=" + id + ", persona=" + persona + ", detalles=" + detalles + '}';
     }
-
+    
+    
 }

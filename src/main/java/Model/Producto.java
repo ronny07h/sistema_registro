@@ -23,7 +23,7 @@ public class Producto implements Serializable {
     @Column
     private String descripcion;
     @Column(nullable = false)
-    private double precio;
+    private float precio;
     @Column(nullable = false)
     private int stock;
     @Column
@@ -38,9 +38,8 @@ public class Producto implements Serializable {
     public Producto(Long id) {
         this.id = id;
     }
-    
-   
-    public Producto(String codigo, String nombre, String descripcion, double precio, int stock, String categoria ) {
+
+    public Producto(String codigo, String nombre, String descripcion, float precio, int stock, String categoria) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -82,11 +81,11 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public double getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 
@@ -106,13 +105,10 @@ public class Producto implements Serializable {
         this.categoria = categoria;
     }
 
-    public String getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(String proveedor) {
-        this.proveedor = proveedor;
-    }
+   
+    
+   
+   
 
     @Override
     public String toString() {

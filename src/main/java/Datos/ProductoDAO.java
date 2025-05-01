@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoDAO {
-    
+
     public int verificarAgregarProducto(Producto productoAgregar) {
         int result = 0;
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
@@ -23,9 +23,9 @@ public class ProductoDAO {
             }
         } catch (NoResultException ex) {
             em.getTransaction().begin();
-            em.persist(productoAgregar);  
+            em.persist(productoAgregar);
             em.getTransaction().commit();
-            result = 1;  
+            result = 1;
         } catch (Exception ex) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
@@ -37,11 +37,10 @@ public class ProductoDAO {
         return result;
     }
 
-    
     public List<Producto> listarProductos() {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         List<Producto> lista = new ArrayList<>();
-        
+
         try {
             lista = em.createQuery("SELECT p FROM Producto p", Producto.class).getResultList();
         } catch (Exception ex) {
@@ -52,7 +51,6 @@ public class ProductoDAO {
         return lista;
     }
 
-    
     public Producto buscarPorCodigo(String codigo) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Producto producto = null;
@@ -73,7 +71,6 @@ public class ProductoDAO {
         return producto;
     }
 
-    
     public Producto buscarPorId(int id) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         Producto producto = null;
@@ -92,7 +89,6 @@ public class ProductoDAO {
         return producto;
     }
 
-    
     public boolean actualizarProducto(Producto producto) {
         if (producto == null || producto.getId() <= 0) {
             throw new IllegalArgumentException("El producto a actualizar no puede ser nulo y debe tener un ID válido.");
@@ -112,7 +108,7 @@ public class ProductoDAO {
                 productoExistente.setDescripcion(producto.getDescripcion());
                 productoExistente.setPrecio(producto.getPrecio());
                 productoExistente.setStock(producto.getStock());
-                
+
                 em.getTransaction().commit();
                 actualizado = true;
                 System.out.println("Producto actualizado con éxito.");
@@ -132,7 +128,6 @@ public class ProductoDAO {
         return actualizado;
     }
 
-    
     public boolean eliminarProducto(int id) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         boolean eliminado = false;
@@ -163,40 +158,39 @@ public class ProductoDAO {
         return eliminado;
     }
 
-   
     public List<Producto> buscarProductos(String criterio) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         List<Producto> resultados = new ArrayList<>();
-        
+
         try {
             resultados = em.createQuery(
-                "SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE :criterio OR LOWER(p.descripcion) LIKE :criterio", 
-                Producto.class)
-                .setParameter("criterio", "%" + criterio.toLowerCase() + "%")
-                .getResultList();
+                    "SELECT p FROM Producto p WHERE LOWER(p.codigo) = :codigo OR LOWER(p.nombre) LIKE :criterio OR LOWER(p.descripcion) LIKE :criterio",
+                    Producto.class)
+                    .setParameter("codigo", criterio.toLowerCase())
+                    .setParameter("criterio", "%" + criterio.toLowerCase() + "%")
+                    .getResultList();
         } catch (Exception e) {
             System.err.println("Error al buscar productos: " + e.getMessage());
         } finally {
             em.close();
         }
-        
+
         return resultados;
     }
 
-    
     public boolean actualizarStock(int idProducto, int nuevoStock) {
         if (nuevoStock < 0) {
             throw new IllegalArgumentException("El stock no puede ser negativo.");
         }
-        
+
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();
         boolean actualizado = false;
-        
+
         try {
             em.getTransaction().begin();
-            
+
             Producto producto = em.find(Producto.class, idProducto);
-            
+
             if (producto != null) {
                 producto.setStock(nuevoStock);
                 em.getTransaction().commit();
@@ -214,7 +208,7 @@ public class ProductoDAO {
         } finally {
             em.close();
         }
-        
+
         return actualizado;
     }
 }

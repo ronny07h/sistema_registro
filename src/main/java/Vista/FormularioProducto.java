@@ -52,17 +52,17 @@ public class FormularioProducto extends javax.swing.JFrame {
         limpiar();
     }
 
-    public void agregar() {
+   public void agregar() {
         if (ValidarFormulario()) {
             String codigo = txt_Codigo.getText().trim();
             String nombre = txt_Nombre.getText().trim();
             String descripcion = txt_Descripcion.getText().trim();
             String categoria = txt_Categoria.getText().trim();
-            double precio;
+            float precio;
             int stock;
 
             try {
-                precio = Double.parseDouble(txt_Precio.getText().trim());
+                precio = Float.parseFloat(txt_Precio.getText().trim());
                 stock = Integer.parseInt(txt_Stock.getText().trim());
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
@@ -76,35 +76,38 @@ public class FormularioProducto extends javax.swing.JFrame {
         }
     }
 
-   public void actualizar() {
-    if (ValidarFormulario()) {
-        String codigo = txt_Codigo.getText().trim();
-        String nombre = txt_Nombre.getText().trim();
-        String descripcion = txt_Descripcion.getText().trim();
-        String categoria = txt_Categoria.getText().trim();
-        double precio;
-        int stock;
+ public void actualizar() {
+        if (ValidarFormulario()) {
+            String codigo = txt_Codigo.getText().trim();
+            String nombre = txt_Nombre.getText().trim();
+            String descripcion = txt_Descripcion.getText().trim();
+            String categoria = txt_Categoria.getText().trim();
+            float precio;
+            int stock;
 
-        try {
-            precio = Double.parseDouble(txt_Precio.getText().trim());
-            stock = Integer.parseInt(txt_Stock.getText().trim());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
-            return;
+            try {
+                precio = Float.parseFloat(txt_Precio.getText().trim());
+                stock = Integer.parseInt(txt_Stock.getText().trim());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
+                return;
+            }
+
+            
+            Producto productoActual = servicio.buscarPorCodigo(codigo);
+
+            if (productoActual != null) {
+                Producto producto = new Producto(codigo, nombre, descripcion, precio, stock, categoria);
+                producto.setId(productoActual.getId());
+                servicio.actualizarProducto(producto);
+                cargarDatos();
+                JOptionPane.showMessageDialog(this, "Producto actualizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró el producto para actualizar",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-        Producto productoActual = servicio.buscarProductos(codigo).get(0);
-        
-        Producto producto = new Producto(codigo, nombre, descripcion, precio, stock, categoria);
-        
-       
-        producto.setId(productoActual.getId());
-        
-        servicio.actualizarProducto(producto);
-        cargarDatos();
-        JOptionPane.showMessageDialog(this, "Producto actualizado correctamente");
     }
-}
 
     private boolean ValidarFormulario() {
         Border bordeRojo = BorderFactory.createLineBorder(Color.RED, 2);
@@ -165,19 +168,21 @@ public class FormularioProducto extends javax.swing.JFrame {
 
         if (confirmacion == JOptionPane.YES_OPTION) {
             try {
-                int idProducto = Integer.parseInt(codigo);
-                boolean resultado = servicio.eliminarProducto(idProducto);
+                Producto producto = servicio.buscarPorCodigo(codigo);
+                if (producto != null) {
+                    boolean resultado = servicio.eliminarProducto(producto.getId().intValue());
 
-                if (resultado) {
-                    cargarDatos();
-                    JOptionPane.showMessageDialog(this, "Producto eliminado correctamente");
+                    if (resultado) {
+                        cargarDatos();
+                        JOptionPane.showMessageDialog(this, "Producto eliminado correctamente");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto por que se esta usando su id",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el producto",
+                    JOptionPane.showMessageDialog(this, "No se encontró el producto para eliminar",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El código debe ser un número válido",
-                        "Error", JOptionPane.ERROR_MESSAGE);
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -352,6 +357,36 @@ public class FormularioProducto extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Categoria:");
 
+        txt_Codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_CodigoKeyTyped(evt);
+            }
+        });
+
+        txt_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_NombreKeyTyped(evt);
+            }
+        });
+
+        txt_Precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_PrecioKeyTyped(evt);
+            }
+        });
+
+        txt_Stock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_StockKeyTyped(evt);
+            }
+        });
+
+        txt_Categoria.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_CategoriaKeyTyped(evt);
+            }
+        });
+
         btn_Actualizar.setText("Actualizar");
         btn_Actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,6 +515,46 @@ public class FormularioProducto extends javax.swing.JFrame {
     private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
         eliminar();
     }//GEN-LAST:event_btn_EliminarActionPerformed
+
+    private void txt_CodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CodigoKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_txt_CodigoKeyTyped
+
+    private void txt_PrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_PrecioKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_txt_PrecioKeyTyped
+
+    private void txt_StockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_StockKeyTyped
+        // TODO add your handling code here:
+          char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_txt_StockKeyTyped
+
+    private void txt_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_NombreKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_txt_NombreKeyTyped
+
+    private void txt_CategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CategoriaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            evt.consume(); 
+        }
+    }//GEN-LAST:event_txt_CategoriaKeyTyped
 
     public static void main(String args[]) {
 

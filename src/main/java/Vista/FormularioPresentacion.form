@@ -203,12 +203,21 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Nombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_NombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Apellido">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_ApellidoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Correo">
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Cedula">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_CedulaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_Guardar">
           <Properties>
