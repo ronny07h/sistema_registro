@@ -5,14 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 
 @Entity
 @Table(name = "usuario")
-
-public class Persona {
+@Inheritance (strategy = InheritanceType.JOINED)
+public abstract class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

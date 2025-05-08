@@ -1,5 +1,7 @@
 package Vista;
 
+import Model.Cliente;
+import Model.Fidelidad;
 import Model.Persona;
 import Negocio.PersonaServicio;
 import java.awt.Color;
@@ -125,33 +127,38 @@ public class FormularioPresentacion extends javax.swing.JFrame {
         }
     }
 
-    public void agregar() {
-        if (ValidarFormulario()) {
-            String nombre = txt_Nombre.getText().trim();
-            String apellido = txt_Apellido.getText().trim();
-            String correo = txt_Correo.getText().trim();
-            String cedula = txt_Cedula.getText().trim();
-
-            Date fechaSeleccionada = jXD_fecha.getDate();
-            if (fechaSeleccionada == null) {
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione una fecha válida.",
-                        "Error de validación", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            LocalDate fechaNacimiento = fechaSeleccionada.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate();
-
-            int edad = PersonaServicio.calcularEdad(fechaNacimiento);
-
-            Persona persona = new Persona(nombre, apellido, correo, cedula, fechaNacimiento, edad);
-            servicio.agregarNuevaPersona(persona);
-
-            cargarDatos();
-            controlarBotones(false);
+    public void agregarPersona() {
+    if (ValidarFormulario()) {
+        String nombre = txt_Nombre.getText().trim();
+        String apellido = txt_Apellido.getText().trim();
+        String correo = txt_Correo.getText().trim();
+        String cedula = txt_Cedula.getText().trim();
+        String direccion = txt_direccionuser.getText().trim(); 
+        
+        Date fechaSeleccionada = jXD_fecha.getDate();
+        if (fechaSeleccionada == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fecha válida.",
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        
+        LocalDate fechaNacimiento = fechaSeleccionada.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        int edad = PersonaServicio.calcularEdad(fechaNacimiento);
+        
+        Cliente cliente = new Cliente(direccion, nombre, apellido, correo, cedula, fechaNacimiento, edad);
+        
+        if (this.fidelidad_ch.isSelected()) {
+            Fidelidad fidelidad = new Fidelidad(cliente, 0, 0, LocalDate.now()); 
+            cliente.setFidelidad(fidelidad);
+        }
+        
+        servicio.agregarNuevaPersona(cliente);
+        cargarDatos();
+        controlarBotones(false);
     }
+}
 
     private void actualizarpersona() {
         try {
@@ -170,6 +177,7 @@ public class FormularioPresentacion extends javax.swing.JFrame {
             String correo = txt_Correo.getText().trim();
             String cedula = txt_Cedula.getText().trim();
             Date fechaSeleccionada = jXD_fecha.getDate();
+            String direccion = txt_direccionuser.getText().trim();
 
             LocalDate fechaNacimiento = fechaSeleccionada.toInstant()
                     .atZone(ZoneId.systemDefault())
@@ -177,13 +185,14 @@ public class FormularioPresentacion extends javax.swing.JFrame {
 
             int edad = PersonaServicio.calcularEdad(fechaNacimiento);
 
-            Persona persona = new Persona();
+            Cliente persona = new Cliente();
             persona.setId(idSeleccionado);
             persona.setNombre(nombre);
             persona.setApellido(apellido);
             persona.setCorreo(correo);
             persona.setCedula(cedula);
             persona.setFecha_de_nacimiento(fechaNacimiento);
+            persona.setDireccion(direccion);
             persona.setEdad(edad);
 
             boolean actualizado = servicio.actualizar(persona);
@@ -200,7 +209,6 @@ public class FormularioPresentacion extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -224,6 +232,9 @@ public class FormularioPresentacion extends javax.swing.JFrame {
         tbl_Persona = new javax.swing.JTable();
         btm_actualizar = new javax.swing.JButton();
         jXD_fecha = new org.jdesktop.swingx.JXDatePicker();
+        jLabel8 = new javax.swing.JLabel();
+        txt_direccionuser = new javax.swing.JTextField();
+        fidelidad_ch = new javax.swing.JCheckBox();
 
         jMenu1.setText("jMenu1");
 
@@ -312,22 +323,21 @@ public class FormularioPresentacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Direccion:");
+
+        txt_direccionuser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_direccionuserKeyTyped(evt);
+            }
+        });
+
+        fidelidad_ch.setText("jCheckBox1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(btn_Guardar)
-                .addGap(76, 76, 76)
-                .addComponent(btn_Buscar)
-                .addGap(260, 260, 260)
-                .addComponent(btm_actualizar)
-                .addGap(32, 32, 32))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -338,27 +348,53 @@ public class FormularioPresentacion extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(188, 188, 188)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(188, 188, 188))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(44, 44, 44)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btn_Eliminar)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txt_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                        .addComponent(txt_Apellido, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                        .addComponent(txt_Correo, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                        .addComponent(txt_Cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
-                                    .addComponent(jXD_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txt_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(txt_Apellido, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(txt_Correo, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(txt_Cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(jXD_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_direccionuser)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_Guardar)
+                                .addGap(76, 76, 76)
+                                .addComponent(btn_Buscar)
+                                .addGap(260, 260, 260)
+                                .addComponent(btm_actualizar)
+                                .addGap(32, 32, 32))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(fidelidad_ch)
+                                .addGap(160, 160, 160))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(64, 64, 64)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fidelidad_ch)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -378,7 +414,11 @@ public class FormularioPresentacion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jXD_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_direccionuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,7 +444,7 @@ public class FormularioPresentacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
-        agregar();
+        agregarPersona();
 
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
@@ -458,6 +498,10 @@ public class FormularioPresentacion extends javax.swing.JFrame {
             evt.consume(); 
         }
     }//GEN-LAST:event_txt_ApellidoKeyTyped
+
+    private void txt_direccionuserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccionuserKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_direccionuserKeyTyped
 
     private boolean ValidarFormulario() {
 
@@ -551,12 +595,14 @@ public class FormularioPresentacion extends javax.swing.JFrame {
     private javax.swing.JButton btn_Buscar;
     private javax.swing.JButton btn_Eliminar;
     private javax.swing.JButton btn_Guardar;
+    private javax.swing.JCheckBox fidelidad_ch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -566,6 +612,7 @@ public class FormularioPresentacion extends javax.swing.JFrame {
     private javax.swing.JTextField txt_Cedula;
     private javax.swing.JTextField txt_Correo;
     private javax.swing.JTextField txt_Nombre;
+    private javax.swing.JTextField txt_direccionuser;
     // End of variables declaration//GEN-END:variables
 
     private int getPersonaSeleccionadaId() {

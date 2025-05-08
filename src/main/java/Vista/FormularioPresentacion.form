@@ -55,20 +55,6 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
-                  <Component id="btn_Guardar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                  <Component id="btn_Buscar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
-                  <Component id="btm_actualizar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
@@ -78,17 +64,24 @@
                               <Component id="jLabel5" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel7" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btn_Eliminar" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txt_Nombre" pref="173" max="32767" attributes="0"/>
-                                          <Component id="txt_Apellido" alignment="0" pref="173" max="32767" attributes="0"/>
-                                          <Component id="txt_Correo" alignment="0" pref="173" max="32767" attributes="0"/>
-                                          <Component id="txt_Cedula" alignment="0" pref="173" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel7" min="-2" pref="119" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel8" min="-2" pref="119" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btn_Eliminar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_Nombre" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txt_Apellido" alignment="0" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txt_Correo" alignment="0" pref="173" max="32767" attributes="0"/>
+                                      <Component id="txt_Cedula" alignment="0" pref="173" max="32767" attributes="0"/>
                                       <Component id="jXD_fecha" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txt_direccionuser" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -100,6 +93,32 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="btn_Guardar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                                  <Component id="btn_Buscar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
+                                  <Component id="btm_actualizar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="fidelidad_ch" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -107,7 +126,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fidelidad_ch" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_Nombre" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -132,7 +153,12 @@
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jXD_fecha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_direccionuser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_Eliminar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btn_Buscar" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
@@ -289,6 +315,24 @@
           </Events>
         </Component>
         <Component class="org.jdesktop.swingx.JXDatePicker" name="jXD_fecha">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel8">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Direccion:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txt_direccionuser">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_direccionuserKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="fidelidad_ch">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
