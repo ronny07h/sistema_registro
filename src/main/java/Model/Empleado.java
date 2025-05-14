@@ -9,6 +9,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Empleado extends Persona {
     private LocalDate fechaContratacion;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "empleado_roles", joinColumns = @JoinColumn(name = "empleado_id"))
+    @CollectionTable(name = "empleado_roles", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "rol")
     private List<String> roles = new ArrayList<>();
 

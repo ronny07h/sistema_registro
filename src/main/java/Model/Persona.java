@@ -2,18 +2,19 @@ package Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
-
 @Entity
 @Table(name = "usuario")
-@Inheritance (strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona {
 
     @Id
@@ -31,6 +32,8 @@ public abstract class Persona {
     private LocalDate fecha_de_nacimiento;
     @Column
     private int edad;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Empleado empleado;
 
     public Persona() {
     }
@@ -38,7 +41,7 @@ public abstract class Persona {
     public Persona(int id) {
         this.id = id;
     }
-   
+
     public Persona(String nombre, String apellido, String correo, String cedula, LocalDate fecha_de_nacimiento, int edad) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -100,16 +103,21 @@ public abstract class Persona {
         return edad;
     }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
     public void setEdad(int edad) {
         this.edad = edad;
     }
 
-    
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
     @Override
     public String toString() {
         return "Persona{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", cedula=" + cedula + ", fecha_de_nacimiento=" + fecha_de_nacimiento + ", edad=" + edad + '}';
     }
 
-    
 }

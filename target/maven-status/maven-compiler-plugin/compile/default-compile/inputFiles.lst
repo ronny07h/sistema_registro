@@ -1,5 +1,6 @@
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\com\mycompany\sistemareguistro\SistemaReguistro.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\ConexionDB.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\EmpleadoDAO.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\FacturaDAO.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\PersonaDAO.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Datos\ProductoDAO.java
@@ -10,12 +11,13 @@ C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Factura.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Fidelidad.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Persona.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Model\Producto.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\EmpleadoServicio.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\FacturaServicio.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\PersonaServicio.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Negocio\ProductoService.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Util\JpaUtil.java
-C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\frm_clientes.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\frm_empleado.java
+C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\frm_persona.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\frmFactura.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\frmProducto.java
 C:\Users\ronny\Desktop\SistemaReguistro\src\main\java\Vista\Principal.java

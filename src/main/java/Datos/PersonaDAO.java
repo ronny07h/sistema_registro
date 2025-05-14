@@ -25,14 +25,14 @@ public class PersonaDAO {
 
             if (personaExiste != null) {
                 System.out.println("La persona ya está registrada.");
-                return result; // Se retorna 0 porque la persona ya existe
+                return result; 
             }
         } catch (NoResultException ex) {
             try {
                 em.getTransaction().begin();
                 em.persist(personaAgregar);
                 em.getTransaction().commit();
-                result = 1; // Se indica que la persona fue agregada correctamente
+                result = 1; 
             } catch (Exception e) {
                 if (em.getTransaction().isActive()) {
                     em.getTransaction().rollback();
