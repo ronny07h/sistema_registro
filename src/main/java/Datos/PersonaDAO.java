@@ -62,7 +62,7 @@ public class PersonaDAO {
         }
         return lista;
     }
-    // En PersonaDAO.java
+  
 
     public boolean eliminarPersona(int id) {
         EntityManager em = JpaUtil.getEntityManagerFactory().createEntityManager();

@@ -63,9 +63,10 @@ public class Principal extends javax.swing.JFrame {
         );
         mainParentLayout.setVerticalGroup(
             mainParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/apoyo-tecnico.png"))); // NOI18N
         jMenu1.setText("Personas");
 
         jMenuItem1.setText("Clientes");
@@ -77,10 +78,16 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Empleados");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/materiales-de-construccion.png"))); // NOI18N
         jMenu2.setText("Productos");
 
         menuproduc.setText("Producto");
@@ -93,6 +100,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cajero-automatico.png"))); // NOI18N
         jMenu3.setText("Factura");
 
         jMenuItem3.setText("Facturacion");
@@ -128,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       this.showForm(new fmr_presentacion()); 
+       this.showForm(new frm_persona()); 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuproducActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuproducActionPerformed
@@ -140,6 +148,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.showForm(new frmFactura());  
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         this.showForm(new frm_empleado()); 
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
