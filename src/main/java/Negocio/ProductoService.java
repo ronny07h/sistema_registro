@@ -61,7 +61,7 @@ public class ProductoService {
         if (producto.getId() <= 0) {
             throw new IllegalArgumentException("El ID del producto debe ser válido.");
         }
-        if (producto.getPrecio() <= 0) {
+        if (producto.getPrecio()<= 0) {
             throw new IllegalArgumentException("El precio debe ser mayor que cero.");
         }
         if (producto.getStock() < 0) {

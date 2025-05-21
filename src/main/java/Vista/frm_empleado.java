@@ -223,7 +223,7 @@ private void agregarEmpleado() {
             LocalDate fechaContratacion = LocalDate.now();
 
             Empleado nuevoEmpleado = new Empleado(
-                nombre, 
+                nombre,
                 apellido, 
                 correo, 
                 cedula,
@@ -233,8 +233,8 @@ private void agregarEmpleado() {
                 salario, 
                 turno, 
                 fechaContratacion,
-                new ArrayList<>(), // Lista vacía de roles
-                null              // Usuario null inicialmente
+                new ArrayList<>(), 
+                null              
             );
 
           

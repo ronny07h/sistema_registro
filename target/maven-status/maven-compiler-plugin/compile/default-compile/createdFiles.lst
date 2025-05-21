@@ -5,6 +5,7 @@ Vista\frmFactura$3.class
 Vista\frm_persona$2.class
 Vista\frmFactura$7.class
 Datos\FacturaDAO.class
+Vista\SistemaLogin$2.class
 Negocio\FacturaServicio.class
 Vista\frm_persona$5.class
 Vista\frmProducto$4.class
@@ -18,11 +19,13 @@ Vista\frmFactura$4.class
 Vista\frm_empleado$2.class
 Vista\frm_persona$8.class
 Vista\frm_persona.class
+Datos\AutenticacionDAO.class
 Vista\frmFactura.class
 Vista\frm_persona$1.class
 Vista\frm_empleado$3.class
 Negocio\ProductoService.class
 Datos\PersonaDAO.class
+Vista\SistemaLogin.class
 Model\Fidelidad.class
 Util\JpaUtil.class
 Vista\frmProducto$1.class
@@ -33,6 +36,7 @@ Vista\frmFactura$2.class
 Vista\frm_persona$4.class
 Vista\frmProducto$5.class
 Model\Factura.class
+Vista\SistemaLogin$1.class
 Vista\frmProducto$11.class
 Vista\frmProducto$8.class
 Vista\Principal$1.class
@@ -57,4 +61,5 @@ Vista\frm_persona$6.class
 Vista\Principal$3.class
 Vista\frmProducto$6.class
 Vista\frmFactura$10.class
+Negocio\LoginServicio.class
 Negocio\EmpleadoServicio.class

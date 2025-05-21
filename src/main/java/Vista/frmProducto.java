@@ -72,14 +72,14 @@ public class frmProducto extends javax.swing.JInternalFrame {
                 precio = Float.parseFloat(txt_Precio.getText().trim());
                 stock = Integer.parseInt(txt_Stock.getText().trim());
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
+                JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos validos.");
                 return;
             }
 
             Producto producto = new Producto(codigo, nombre, descripcion, precio, stock, categoria);
             servicio.agregarNuevoProducto(producto);
             cargarDatos();
-            JOptionPane.showMessageDialog(this, "Producto guardado correctamente");
+            JOptionPane.showMessageDialog(this, "Producto guardado existosamente");
         }
     }
 
@@ -96,7 +96,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
                 precio = Float.parseFloat(txt_Precio.getText().trim());
                 stock = Integer.parseInt(txt_Stock.getText().trim());
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
+                JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos validos.");
                 return;
             }
 
@@ -108,9 +108,9 @@ public class frmProducto extends javax.swing.JInternalFrame {
                 producto.setId(productoActual.getId());
                 servicio.actualizarProducto(producto);
                 cargarDatos();
-                JOptionPane.showMessageDialog(this, "Producto actualizado correctamente");
+                JOptionPane.showMessageDialog(this, "Producto actualizado exitosamente");
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró el producto para actualizar",
+                JOptionPane.showMessageDialog(this, "No se encontró el producto a actualizar",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -136,7 +136,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
 
         if (!codigoValidado || !nombreValido || !descripcionValido
                 || !precioValido || !stockValida || !categoriaValida) {
-            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos obligatorios");
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos ");
             return false;
         }
 
@@ -144,7 +144,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
             Double.parseDouble(txt_Precio.getText().trim());
             Integer.parseInt(txt_Stock.getText().trim());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos.");
+            JOptionPane.showMessageDialog(this, "El precio y el stock deben ser valores numéricos validos.");
             return false;
         }
 
@@ -164,7 +164,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
     public void eliminar() {
         String codigo = txt_Codigo.getText().trim();
         if (codigo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un producto para eliminar");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar al menos un producto para eliminar");
             return;
         }
 

@@ -31,6 +31,9 @@ public class Empleado extends Persona {
     @Column(name = "fecha_contratacion", nullable = false)
     private LocalDate fechaContratacion;
 
+    @Column
+    private String clave;      
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "empleado_roles", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "rol")
@@ -42,9 +45,9 @@ public class Empleado extends Persona {
     public Empleado() {
     }
 
-    public Empleado(int id, String nombre, String apellido, String correo, String cedula, 
-                   LocalDate fecha_de_nacimiento, int edad, String direccion, double salario, 
-                   String turno, LocalDate fechaContratacion) {
+    public Empleado(int id, String nombre, String apellido, String correo, String cedula,
+            LocalDate fecha_de_nacimiento, int edad, String direccion, double salario,
+            String turno, LocalDate fechaContratacion) {
         super(nombre, apellido, correo, cedula, fecha_de_nacimiento, edad);
         this.direccion = direccion;
         this.salario = salario;
@@ -52,9 +55,9 @@ public class Empleado extends Persona {
         this.fechaContratacion = fechaContratacion;
     }
 
-    public Empleado(String nombre, String apellido, String correo, String cedula, 
-                   LocalDate fecha_de_nacimiento, int edad, String direccion, double salario, 
-                   String turno, LocalDate fechaContratacion, List<String> roles, Persona usuario) {
+    public Empleado(String nombre, String apellido, String correo, String cedula,
+            LocalDate fecha_de_nacimiento, int edad, String direccion, double salario,
+            String turno, LocalDate fechaContratacion, List<String> roles, Persona usuario) {
         super(nombre, apellido, correo, cedula, fecha_de_nacimiento, edad);
         this.direccion = direccion;
         this.salario = salario;
@@ -64,7 +67,19 @@ public class Empleado extends Persona {
         this.usuario = usuario;
     }
 
-   
+    // GETTER Y SETTER NUEVO PARA CLAVE (ÚNICO CAMBIO ADICIONAL)
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    /* 
+     * EL RESTO DE TU CÓDIGO PERMANECE EXACTAMENTE IGUAL 
+     * (mismos getters, setters y métodos que ya tenías)
+     */
     public String getDireccion() {
         return direccion;
     }
@@ -125,14 +140,14 @@ public class Empleado extends Persona {
 
     @Override
     public String toString() {
-        return "Empleado{" +
-                "direccion=" + direccion +
-                ", salario=" + salario +
-                ", turno=" + turno +
-                ", fechaContratacion=" + fechaContratacion +
-                ", roles=" + roles +
-                ", usuario=" + usuario +
-                '}';
+        return "Empleado{"
+                + "direccion=" + direccion
+                + ", salario=" + salario
+                + ", turno=" + turno
+                + ", fechaContratacion=" + fechaContratacion
+                + ", roles=" + roles
+                + ", usuario=" + usuario
+                + '}';
     }
 
     public boolean hasRol(String rol) {
