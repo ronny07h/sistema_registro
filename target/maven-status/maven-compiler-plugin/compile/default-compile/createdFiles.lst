@@ -48,6 +48,7 @@ Vista\Principal$4.class
 Vista\frm_persona$7.class
 Datos\ProductoDAO.class
 Datos\ConexionDB.class
+Vista\frm_empleado$4.class
 Model\Cliente.class
 Vista\frmFactura$1.class
 Model\Persona.class
@@ -57,6 +58,7 @@ Model\Empleado.class
 Vista\frmProducto$3.class
 Vista\frmFactura$6.class
 Vista\frm_empleado$1.class
+Vista\frm_empleado$5.class
 Vista\frm_persona$6.class
 Vista\Principal$3.class
 Vista\frmProducto$6.class

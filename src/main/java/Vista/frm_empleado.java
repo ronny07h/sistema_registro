@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Datos.EmpleadoDAO;
 import Model.Cliente;
 import Model.Empleado;
 import Model.Fidelidad;
@@ -50,6 +51,11 @@ public class frm_empleado extends javax.swing.JInternalFrame {
             }
         });
 
+btnCalcularSalario.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        calcularSalarioActionPerformed(evt);
+    }
+});
         btn_buscarem.addActionListener(e -> buscarEmpleado());
         btn_guardarem.addActionListener(e -> agregarEmpleado());
         btn_actualizarem.addActionListener(e -> actualizarEmpleado());
@@ -344,7 +350,50 @@ private void actualizarEmpleado() {
             }
         }
     }
-
+public void calcularSalarioActionPerformed(java.awt.event.ActionEvent evt) {
+    
+    String cedula = txt_cedulaem.getText().trim();
+    
+    
+    if (cedula.isEmpty()) {
+        JOptionPane.showMessageDialog(this, 
+            "Por favor ingrese la cédula del empleado",
+            "Campo requerido", 
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    
+    EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    
+    try {
+       
+        double salarioAcumulado = empleadoDAO.calcularSalarioAcumuladoPorCedula(cedula);
+        
+     
+        if (salarioAcumulado >= 0) {
+           
+            String resultado = String.format("$%,.2f", salarioAcumulado);
+            lblResultado.setText(resultado);
+            
+         
+            JOptionPane.showMessageDialog(this,
+                "Salario acumulado: " + resultado,
+                "Resultado del cálculo",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo calcular el salario acumulado",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+            "Error al realizar el cálculo: " + e.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -377,6 +426,8 @@ private void actualizarEmpleado() {
         btn_eliminarem = new javax.swing.JButton();
         btn_actualizarem = new javax.swing.JButton();
         btn_guardarem = new javax.swing.JButton();
+        btnCalcularSalario = new javax.swing.JButton();
+        lblResultado = new javax.swing.JLabel();
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 2, 24)); // NOI18N
@@ -444,6 +495,13 @@ private void actualizarEmpleado() {
         btn_guardarem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/disco-flexible.png"))); // NOI18N
         btn_guardarem.setText("Guardar");
 
+        btnCalcularSalario.setText("calcular salario");
+        btnCalcularSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularSalarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -458,7 +516,9 @@ private void actualizarEmpleado() {
                         .addGap(44, 44, 44)
                         .addComponent(btn_eliminarem)
                         .addGap(41, 41, 41)
-                        .addComponent(btn_actualizarem))
+                        .addComponent(btn_actualizarem)
+                        .addGap(61, 61, 61)
+                        .addComponent(btnCalcularSalario))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -477,7 +537,6 @@ private void actualizarEmpleado() {
                             .addComponent(jLabel11))
                         .addGap(143, 143, 143)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbx_turnoem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jdx_fechanacem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,11 +547,15 @@ private void actualizarEmpleado() {
                                 .addComponent(txt_nombreem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txt_salarioem, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_direcem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txt_direcem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbx_turnoem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                                .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,19 +598,26 @@ private void actualizarEmpleado() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jXDatePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbx_turnoem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_buscarem)
-                    .addComponent(btn_eliminarem)
-                    .addComponent(btn_actualizarem)
-                    .addComponent(btn_guardarem))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbx_turnoem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_buscarem)
+                            .addComponent(btn_eliminarem)
+                            .addComponent(btn_actualizarem)
+                            .addComponent(btn_guardarem)
+                            .addComponent(btnCalcularSalario))
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(256, 256, 256))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,8 +642,15 @@ private void actualizarEmpleado() {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_buscaremActionPerformed
 
+    private void btnCalcularSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularSalarioActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btnCalcularSalarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcularSalario;
     private javax.swing.JButton btn_actualizarem;
     private javax.swing.JButton btn_buscarem;
     private javax.swing.JButton btn_eliminarem;
@@ -595,6 +672,7 @@ private void actualizarEmpleado() {
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker2;
     private org.jdesktop.swingx.JXDatePicker jdx_fechanacem;
+    private javax.swing.JLabel lblResultado;
     private javax.swing.JTable tbl_empleado;
     private javax.swing.JTextField txt_apellidoem;
     private javax.swing.JTextField txt_cedulaem;
